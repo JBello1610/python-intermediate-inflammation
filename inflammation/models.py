@@ -62,5 +62,5 @@ def s_dev(data):
     for entry in data:
         devs.append((entry - mean_of_data) * (entry - mean_of_data))
 
-    s_dev2 = sum(devs) / len(data)
-    return {"standard deviation": s_dev2}
+    standard_dev = sum(devs) / len(data)
+    return {"standard deviation": np.sqrt(standard_dev)}
