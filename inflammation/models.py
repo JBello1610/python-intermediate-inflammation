@@ -2,8 +2,8 @@
 
 The Model layer is responsible for the 'business logic' part of the software.
 
-Patients' data is held in an inflammation table (2D array) where each row contains 
-inflammation data for a single patient taken over a number of days 
+Patients' data is held in an inflammation table (2D array) where each row contains
+inflammation data for a single patient taken over a number of days
 and each column represents a single day across all patients.
 """
 
@@ -16,7 +16,8 @@ def load_csv(filename):
 
     :param filename: Filename of CSV to load
     """
-    return np.loadtxt(fname=filename, delimiter=',')
+    return np.loadtxt(fname=filename, delimiter=",")
+
 
 def load_json(filename):
     """Load a numpy array from a JSON document.
@@ -34,10 +35,9 @@ def load_json(filename):
     :param filename: Filename of CSV to load
 
     """
-    with open(filename, 'r', encoding='utf-8') as file:
+    with open(filename, "r", encoding="utf-8") as file:
         data_as_json = json.load(file)
-        return [np.array(entry['observations']) for entry in data_as_json]
-
+        return [np.array(entry["observations"]) for entry in data_as_json]
 
 
 def daily_mean(data):
@@ -57,10 +57,10 @@ def daily_min(data):
 
 def s_dev(data):
     """Computes and returns standard deviation for data."""
-    mmm = np.mean(data, axis=0)
+    mean_of_data = np.mean(data, axis=0)
     devs = []
     for entry in data:
-        devs.append((entry - mmm) * (entry - mmm))
+        devs.append((entry - mean_of_data) * (entry - mean_of_data))
 
     s_dev2 = sum(devs) / len(data)
-    return {'standard deviation': s_dev2}
+    return {"standard deviation": s_dev2}
